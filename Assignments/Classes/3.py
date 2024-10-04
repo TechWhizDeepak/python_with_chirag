@@ -7,20 +7,22 @@ Using Instance Method
 Using Class Method print How much mobile cell
 If i need to check mobile stock it return list of mobile are available 
 '''
+class Mobile: 
+    in_stock = {"Apple": 10, "Samsung": 5, "Xiaomi" : 8}
+    out_stock = {"Apple": 5, "Samsung": 0, "Xiaomi" : 0}
+    total_stock = {}
 
-class Mobile:
-    sales = 0
     def __init__(self,model_name,brand_name,price):
         self.model_name = model_name
         self.brand_name = brand_name
         self.price = price
-    
+   
     def print_bill(self):
         discount = self.price * .20
         GST = (self.price - discount) * .18
-        Mobile.sales += 1
+        Mobile.out_stock[self.brand_name]+=1
         return f'''
-#Receipt No: {Mobile.sales}
+#Receipt No: 1
 #Model_name: {self.model_name}
 #Brand_name: {self.brand_name}
 Basic Price : {self.price}
@@ -29,18 +31,12 @@ GST : {GST}
 Total Price : {self.price - discount + GST}
 '''
     @classmethod
-    def sales_count(cls):
-        return f"Total Mobiles sold: {cls.sales}"
-    
     def total_inventory(cls):
-        in_stock = {"Apple": 10, "Samsung": 5, "Xiaomi" : 8}
-        out_stock = {"Apple": 5, "Samsung": 0, "Xiaomi" : 0}
-        total_stock = {}
-        for key,value in in_stock.items():
-            for i,j in out_stock.items():
+        for key,value in cls.in_stock.items():
+            for i,j in cls.out_stock.items():
                 if key == i:
-                    total_stock[key] = value - j
-        return total_stock
+                    cls.total_stock[key] = value - j
+        return cls.total_stock
 
 
 Apple = Mobile("Iphone 16 Pro Max", "Apple",140000)
@@ -50,5 +46,4 @@ Xiaomi = Mobile("Chinese Phone 1 ", "Xiaomi",10000)
 print(Apple.print_bill())
 print(Samsung.print_bill())
 print(Xiaomi.print_bill())
-print(Mobile.sales_count())
 print(Mobile.total_inventory())

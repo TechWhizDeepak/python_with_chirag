@@ -3,7 +3,7 @@
 '''
 
 def find_the_second_smallest_number(listA):
-    smallest_number = int('inf')
+    smallest_number = float('inf')
     second_smallest_number = float('inf')
     for i in listA:
         if i < smallest_number:

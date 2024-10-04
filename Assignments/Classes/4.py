@@ -13,4 +13,4 @@ class Student:
         return f"Student name is : {self.student_name} and his id is: {self.student_id}"
     
 Deepak = Student(8, "Deepak Kumar")
-print(Student.student_class(Deepak))
+print(Deepak.student_class())
